@@ -8,9 +8,21 @@
 
     <script>
         "use strict";
-        
+
         var WORDS     = ["booger", "apple", "hackbright", "mango"];
-        var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman"];
+        // var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman"];
+
+        function scrambleWord(randomWord) {
+            var splitWord = randomWord.split("");
+            var scrambled = ""
+
+            for(var i = splitWord.length; i > 0; i--) {
+                var randomIndex = Math.floor(Math.random() * i);
+
+                scrambled += splitWord.pop(randomIndex);
+            }
+            return scrambled;
+        }
 
         var playing = true;
 
@@ -21,11 +33,12 @@
             var randomWord = WORDS[indexPosition];
 
             // Grab the corresponding scrambled word from the SCRAMBLED array
-            var scrambleWord = SCRAMBLED[indexPosition];
+            var scrambled = scrambleWord(randomWord);
 
 
             // prompt the user to guess the original word when given the scrambled word
-            var userAnswer = prompt("Guess the word: " + scrambleWord);
+            var userAnswer = prompt("Guess the word: " + scrambled);
+            userAnswer = userAnswer.toLowerCase().trim();
 
 
             // If the user guesses wrong, tell them they were wrong and the right word.
